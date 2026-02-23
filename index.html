@@ -1,564 +1,1004 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SimpleWeb IL — Professional Websites for Local Businesses</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0f0f0f;
-    --cream: #f5f0e8;
-    --gold: #c9a84c;
-    --gold-light: #e8d08a;
-    --white: #ffffff;
-    --muted: #6b6b6b;
-    --card-bg: #1a1a1a;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimpleWeb IL — Professional Websites for Local Businesses</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f0f0f;
+      --cream: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-light: #e8d08a;
+      --white: #ffffff;
+      --muted: #6b6b6b;
+      --card-bg: #1a1a1a;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--ink);
-    color: var(--white);
-    overflow-x: hidden;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 5%;
-    background: rgba(15,15,15,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.15);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.02em;
-    cursor: pointer;
-  }
-  .nav-logo span { color: var(--white); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: rgba(255,255,255,0.7);
-    text-decoration: none; font-size: 0.9rem;
-    font-weight: 500; letter-spacing: 0.05em;
-    text-transform: uppercase; transition: color 0.2s;
-    cursor: pointer;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--gold);
-    color: var(--ink) !important;
-    padding: 0.5rem 1.2rem;
-    border-radius: 3px; font-weight: 500 !important;
-  }
-  .nav-cta:hover { background: var(--gold-light) !important; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 8rem 5% 5rem;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 70%, rgba(201,168,76,0.05) 0%, transparent 50%);
-  }
-  .hero-tag {
-    display: inline-block;
-    background: rgba(201,168,76,0.12);
-    border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gold); font-size: 0.75rem; font-weight: 500;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 0.4rem 1rem; border-radius: 2px; margin-bottom: 2rem;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 7vw, 6rem); font-weight: 900;
-    line-height: 1.05; margin-bottom: 1.5rem;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-  .hero h1 em { font-style: italic; color: var(--gold); }
-  .hero p {
-    font-size: 1.15rem; color: rgba(255,255,255,0.6);
-    max-width: 560px; line-height: 1.7; margin-bottom: 2.5rem;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-  .hero-price {
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.4);
-    border-radius: 4px; padding: 1rem 2rem; margin-bottom: 2.5rem;
-    animation: fadeUp 0.8s 0.25s ease both;
-  }
-  .hero-price p { font-size: 1rem; color: var(--gold); font-weight: 500; margin: 0; }
-  .hero-price strong { font-size: 1.5rem; }
-  .hero-btns {
-    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-  .btn-primary {
-    background: var(--gold); color: var(--ink);
-    padding: 0.85rem 2rem; border: none; border-radius: 3px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-    font-weight: 500; cursor: pointer; letter-spacing: 0.03em;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-block; text-decoration: none;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent; color: var(--white);
-    padding: 0.85rem 2rem; border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 3px; font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem; font-weight: 500; cursor: pointer;
-    letter-spacing: 0.03em; transition: border-color 0.2s, color 0.2s, transform 0.15s;
-    display: inline-block; text-decoration: none;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ink);
+      color: var(--white);
+      overflow-x: hidden;
+    }
 
-  /* SECTIONS */
-  section { padding: 6rem 5%; }
-  .section-label {
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
-    line-height: 1.15; margin-bottom: 1rem;
-  }
-  .section-sub {
-    color: rgba(255,255,255,0.55); font-size: 1rem;
-    line-height: 1.7; max-width: 560px;
-  }
-  .section-header { margin-bottom: 3.5rem; }
-  .section-header.center { text-align: center; }
-  .section-header.center .section-sub { margin: 0 auto; }
-  .divider {
-    width: 100%; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
-  }
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(15, 15, 15, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
 
-  /* STATS */
-  .why-section { background: #111; }
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .stat-card {
-    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 6px; padding: 2rem; position: relative; overflow: hidden;
-    transition: border-color 0.3s, transform 0.2s;
-  }
-  .stat-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
-  .stat-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 3px; background: linear-gradient(to right, var(--gold), var(--gold-light));
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .stat-card:hover::before { opacity: 1; }
-  .stat-number { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
-  .stat-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .stat-card p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+      cursor: pointer;
+    }
 
-  /* PORTFOLIO */
-  .portfolio-section { background: var(--ink); }
-  .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-  .portfolio-card {
-    border-radius: 8px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: transform 0.3s, border-color 0.3s; background: var(--card-bg);
-  }
-  .portfolio-card:hover { transform: translateY(-6px); border-color: rgba(201,168,76,0.35); }
-  .portfolio-img {
-    width: 100%; height: 220px; object-fit: cover; display: block;
-    filter: brightness(0.9) saturate(0.85); transition: filter 0.3s;
-  }
-  .portfolio-card:hover .portfolio-img { filter: brightness(1) saturate(1); }
-  .portfolio-info { padding: 1.5rem; }
-  .portfolio-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-  .portfolio-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .portfolio-info p { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
-  .portfolio-features { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-  .feature-pill {
-    font-size: 0.7rem; padding: 0.2rem 0.6rem;
-    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 20px; color: var(--gold);
-  }
+    .nav-logo span {
+      color: var(--white);
+    }
 
-  /* PRICING */
-  .pricing-section { background: #111; }
-  .pricing-card {
-    max-width: 500px; margin: 0 auto;
-    background: linear-gradient(135deg, #1e1e1e, #141414);
-    border: 1px solid rgba(201,168,76,0.4);
-    border-radius: 12px; padding: 3rem; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .pricing-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(to right, var(--gold), var(--gold-light), var(--gold));
-  }
-  .pricing-badge {
-    display: inline-block; background: rgba(201,168,76,0.15);
-    border: 1px solid rgba(201,168,76,0.3); color: var(--gold);
-    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
-    text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 20px; margin-bottom: 1.5rem;
-  }
-  .pricing-amount { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--gold); line-height: 1; }
-  .pricing-currency { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); vertical-align: top; margin-top: 1rem; display: inline-block; }
-  .pricing-desc { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin: 0.5rem 0 2rem; }
-  .pricing-list { list-style: none; text-align: left; margin-bottom: 2rem; }
-  .pricing-list li {
-    padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 0.9rem; color: rgba(255,255,255,0.75);
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .pricing-list li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
-  .lang-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px; padding: 0.6rem 1.2rem; font-size: 0.85rem;
-    color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;
-  }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
 
-  /* CONTACT */
-  .contact-section { background: var(--ink); }
-  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .contact-methods { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
-  .contact-method {
-    display: flex; align-items: center; gap: 1rem;
-    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 6px; padding: 1.2rem 1.5rem; text-decoration: none; color: inherit;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .contact-method:hover { border-color: rgba(201,168,76,0.4); transform: translateX(4px); }
-  .contact-icon { font-size: 1.4rem; width: 40px; text-align: center; flex-shrink: 0; }
-  .contact-method-info small { display: block; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
-  .contact-method-info strong { font-size: 0.95rem; color: rgba(255,255,255,0.85); font-weight: 400; }
-  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-group label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 500; }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px; padding: 0.75rem 1rem; color: var(--white);
-    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
-  .form-group textarea { resize: vertical; min-height: 120px; }
-  .form-group select option { background: #1a1a1a; }
-  .form-submit {
-    background: var(--gold); color: var(--ink); border: none; border-radius: 4px;
-    padding: 0.9rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-    font-weight: 600; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s, transform 0.15s;
-  }
-  .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .form-note { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-align: center; margin-top: 0.3rem; }
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
 
-  /* FOOTER */
-  footer {
-    text-align: center; padding: 2.5rem 5%;
-    border-top: 1px solid rgba(255,255,255,0.07);
-    color: rgba(255,255,255,0.3); font-size: 0.85rem;
-  }
-  footer span { color: var(--gold); }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--ink) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 3px;
+      font-weight: 500 !important;
+    }
 
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero h1 { font-size: 2.8rem; }
-    .pricing-amount { font-size: 4rem; }
-  }
-</style>
+    .nav-cta:hover {
+      background: var(--gold-light) !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 5% 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 70%, rgba(201, 168, 76, 0.05) 0%, transparent 50%);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-price {
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 4px;
+      padding: 1rem 2rem;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.25s ease both;
+    }
+
+    .hero-price p {
+      font-size: 1rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .hero-price strong {
+      font-size: 1.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 5%;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header.center {
+      text-align: center;
+    }
+
+    .section-header.center .section-sub {
+      margin: 0 auto;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201, 168, 76, 0.3), transparent);
+    }
+
+    /* STATS */
+    .why-section {
+      background: #111;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(201, 168, 76, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--gold), var(--gold-light));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.6;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-section {
+      background: var(--ink);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .portfolio-card {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.3s, border-color 0.3s;
+      background: var(--card-bg);
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201, 168, 76, 0.35);
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9) saturate(0.85);
+      transition: filter 0.3s;
+    }
+
+    .portfolio-card:hover .portfolio-img {
+      filter: brightness(1) saturate(1);
+    }
+
+    .portfolio-info {
+      padding: 1.5rem;
+    }
+
+    .portfolio-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-info p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.6;
+    }
+
+    .portfolio-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .feature-pill {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 20px;
+      color: var(--gold);
+    }
+
+    /* PRICING */
+    .pricing-section {
+      background: #111;
+    }
+
+    .pricing-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #1e1e1e, #141414);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--gold), var(--gold-light), var(--gold));
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .pricing-currency {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      vertical-align: top;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .pricing-desc {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      margin: 0.5rem 0 2rem;
+    }
+
+    .pricing-list {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .pricing-list li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .lang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1.5rem;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--ink);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 6px;
+      padding: 1.2rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .contact-method:hover {
+      border-color: rgba(201, 168, 76, 0.4);
+      transform: translateX(4px);
+    }
+
+    .contact-icon {
+      font-size: 1.4rem;
+      width: 40px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .contact-method-info small {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-method-info strong {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group select option {
+      background: #1a1a1a;
+    }
+
+    .form-submit {
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      border-radius: 4px;
+      padding: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .form-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.35);
+      text-align: center;
+      margin-top: 0.3rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem 5%;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--gold);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .pricing-amount {
+        font-size: 4rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo" onclick="scrollTo(0,0)">Simple<span>Web</span> IL</div>
-  <ul class="nav-links">
-    <li><a onclick="scrollToSection('why')">Why a Website</a></li>
-    <li><a onclick="scrollToSection('portfolio')">Portfolio</a></li>
-    <li><a onclick="scrollToSection('pricing')">Pricing</a></li>
-    <li><a onclick="scrollToSection('contact')" class="nav-cta">Get Started</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-tag">Professional • Affordable • Fast</div>
-  <h1>Your Business Deserves<br>to be <em>Found Online</em></h1>
-  <p>We build clean, professional websites for local businesses — quickly and affordably. In English or Hebrew.</p>
-  <div class="hero-price">
-    <p>Flat rate — no surprises. <strong>₪1,000</strong> per website.</p>
-    <p>גם בעברית &nbsp;🇮🇱</p>
-  </div>
-  <div class="hero-btns">
-    <button class="btn-primary" onclick="scrollToSection('contact')">Get Your Website</button>
-    <button class="btn-outline" onclick="scrollToSection('portfolio')">See Our Work</button>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- WHY A WEBSITE -->
-<section class="why-section" id="why">
-  <div class="section-header center">
-    <p class="section-label">The Data</p>
-    <h2 class="section-title">Why Your Business Needs a Website</h2>
-    <p class="section-sub">These aren't opinions — they're facts. Here's what the research says about businesses without an online presence.</p>
-  </div>
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-number">97%</div>
-      <h3>Consumers Search Online</h3>
-      <p>~97% of people use the internet to find local businesses. Without a website, you're effectively invisible to nearly all potential customers.</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">75%</div>
-      <h3>Credibility Comes First</h3>
-      <p>~75% of users judge a business's trustworthiness based on its website design and quality. First impressions happen online now.</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">81%</div>
-      <h3>Research Before Buying</h3>
-      <p>81% of shoppers research products and services online before making a purchase. Be there when they're looking.</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">24/7</div>
-      <h3>Always Open</h3>
-      <p>A website works for you around the clock — collecting leads, answering questions, and showcasing your services even when you're closed.</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">46%</div>
-      <h3>Local Search Intent</h3>
-      <p>~46% of all Google searches are looking for local business information. Local customers are actively searching for businesses like yours.</p>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">61%</div>
-      <h3>Mobile Matters</h3>
-      <p>~61% of mobile searchers are more likely to contact a business that has a mobile-friendly website. We build every site to be fully responsive.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- PORTFOLIO -->
-<section class="portfolio-section" id="portfolio">
-  <div class="section-header center">
-    <p class="section-label">Our Work</p>
-    <h2 class="section-title">Websites We Can Build for You</h2>
-    <p class="section-sub">From barbers to opticians to tradespeople — we create tailored websites for any local business.</p>
-  </div>
-  <div class="portfolio-grid">
-
-    <div class="portfolio-card">
-      <img class="portfolio-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNjAwIDI4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTBmMGEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMmQxYTEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJtaXJyb3IiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzNhMmExZjtzdG9wLW9wYWNpdHk6MSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTEwMGE7c3RvcC1vcGFjaXR5OjEiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2JnMSkiLz4KICA8cmVjdCB4PSIwIiB5PSIyMTAiIHdpZHRoPSI2MDAiIGhlaWdodD0iNzAiIGZpbGw9IiMxMjBhMDYiLz4KICA8cmVjdCB4PSIwIiB5PSIyMTAiIHdpZHRoPSI2MDAiIGhlaWdodD0iMiIgZmlsbD0iIzhCNUUzQyIgb3BhY2l0eT0iMC40Ii8+CiAgPGxpbmUgeDE9IjAiIHkxPSI3MCIgeDI9IjYwMCIgeTI9IjcwIiBzdHJva2U9IiMyYTFhMTIiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC40Ii8+CiAgPGxpbmUgeDE9IjAiIHkxPSIxNDAiIHgyPSI2MDAiIHkyPSIxNDAiIHN0cm9rZT0iIzJhMWExMiIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KICA8cmVjdCB4PSI2MCIgeT0iMjAiIHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNCIgZmlsbD0idXJsKCNtaXJyb3IpIiBzdHJva2U9IiM4QjVFM0MiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxyZWN0IHg9IjY4IiB5PSIyOCIgd2lkdGg9IjE2NCIgaGVpZ2h0PSIxNjQiIHJ4PSIyIiBmaWxsPSIjMWUxMjA5IiBvcGFjaXR5PSIwLjYiLz4KICA8ZWxsaXBzZSBjeD0iMTUwIiBjeT0iMTEwIiByeD0iNjAiIHJ5PSI4MCIgZmlsbD0iIzNhMjAxNSIgb3BhY2l0eT0iMC4zIi8+CiAgPHJlY3QgeD0iMjgwIiB5PSIxMzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iODAiIHJ4PSI4IiBmaWxsPSIjOEIxYTFhIi8+CiAgPHJlY3QgeD0iMjgwIiB5PSIxMzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjYTAyMDIwIi8+CiAgPHJlY3QgeD0iMjcwIiB5PSIxNTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI2MCIgcng9IjQiIGZpbGw9IiM1YTNhMWEiLz4KICA8cmVjdCB4PSIzOTAiIHk9IjE1MCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjYwIiByeD0iNCIgZmlsbD0iIzVhM2ExYSIvPgogIDxyZWN0IHg9IjI5MCIgeT0iMjAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjE1IiByeD0iNCIgZmlsbD0iIzRhMmExMCIvPgogIDxyZWN0IHg9IjMyMCIgeT0iMjE1IiB3aWR0aD0iNDAiIGhlaWdodD0iNTAiIHJ4PSI0IiBmaWxsPSIjNWEzYTFhIi8+CiAgPHJlY3QgeD0iMzAwIiB5PSIyNTgiIHdpZHRoPSI5MCIgaGVpZ2h0PSIxMiIgcng9IjMiIGZpbGw9IiMzYTIwMTAiLz4KICA8cmVjdCB4PSIyOTUiIHk9IjEwOCIgd2lkdGg9IjkwIiBoZWlnaHQ9IjMwIiByeD0iMTIiIGZpbGw9IiM4QjFhMWEiLz4KICA8cmVjdCB4PSI1MTAiIHk9IjIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMTgwIiByeD0iMTIiIGZpbGw9IiNmMGYwZjAiLz4KICA8cGF0aCBkPSJNNTEwLDIwIFE1MjIsNTAgNTM0LDgwIFE1MjIsMTEwIDUxMCwxNDAgUTUyMiwxNzAgNTM0LDIwMCIgc3Ryb2tlPSIjYzAzOTJiIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiLz4KICA8cGF0aCBkPSJNNTEwLDIwIFE1MjIsNTAgNTM0LDgwIFE1MjIsMTEwIDUxMCwxNDAgUTUyMiwxNzAgNTM0LDIwMCIgc3Ryb2tlPSIjMjk4MGI5IiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1kYXNoYXJyYXk9IjIwLDQwIiBzdHJva2UtZGFzaG9mZnNldD0iMjAiLz4KICA8ZWxsaXBzZSBjeD0iNTIyIiBjeT0iMjAiIHJ4PSIxNCIgcnk9IjgiIGZpbGw9IiNkZGQiLz4KICA8ZWxsaXBzZSBjeD0iNTIyIiBjeT0iMjAwIiByeD0iMTQiIHJ5PSI4IiBmaWxsPSIjZGRkIi8+CiAgPHJlY3QgeD0iNjAiIHk9IjIwNSIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI2IiByeD0iMiIgZmlsbD0iIzVhM2ExYSIvPgogIDxyZWN0IHg9IjgwIiB5PSIxNzUiIHdpZHRoPSIxNiIgaGVpZ2h0PSIzMCIgcng9IjMiIGZpbGw9IiNjMDM5MmIiLz4KICA8cmVjdCB4PSIxMDAiIHk9IjE3OCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjI3IiByeD0iMyIgZmlsbD0iIzI5ODBiOSIvPgogIDxyZWN0IHg9IjExOCIgeT0iMTgwIiB3aWR0aD0iMTIiIGhlaWdodD0iMjUiIHJ4PSIzIiBmaWxsPSIjMjdhZTYwIi8+CiAgPHJlY3QgeD0iMTM0IiB5PSIxNzciIHdpZHRoPSIxNiIgaGVpZ2h0PSIyOCIgcng9IjMiIGZpbGw9IiM4QjVFM0MiLz4KICA8cmVjdCB4PSIxODAiIHk9IjI1IiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjQ1IiByeD0iNiIgZmlsbD0iIzFhMGEwNSIgc3Ryb2tlPSIjOEI1RTNDIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIzMjAiIHk9IjU0IiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNjOWE4NGMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIzIj5CQVJCRVIgU0hPUDwvdGV4dD4KPC9zdmc+" alt="Barber Shop">
-      <div class="portfolio-info">
-        <p class="portfolio-tag">Barber Shop</p>
-        <h3>Classic Cuts Barbershop</h3>
-        <p>A stylish site featuring services, pricing, online booking, and a gallery — everything a modern barbershop needs to attract new clients.</p>
-        <div class="portfolio-features">
-          <span class="feature-pill">Online Booking</span>
-          <span class="feature-pill">Service Menu</span>
-          <span class="feature-pill">Photo Gallery</span>
-          <span class="feature-pill">Contact Map</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="portfolio-card">
-      <img class="portfolio-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNjAwIDI4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTEwMjAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTAxODI4Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnbGFzcyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTNhNWM7c3RvcC1vcGFjaXR5OjAuNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTE4Mjg7c3RvcC1vcGFjaXR5OjAuNiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjYmcyKSIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiBmaWxsPSIjMGQxNTI1Ii8+CiAgPGxpbmUgeDE9IjAiIHkxPSI5MCIgeDI9IjYwMCIgeTI9IjkwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIwIiB5MT0iMTgwIiB4Mj0iNjAwIiB5Mj0iMTgwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIyMDAiIHkxPSIwIiB4Mj0iMjAwIiB5Mj0iMjgwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSI0MDAiIHkxPSIwIiB4Mj0iNDAwIiB5Mj0iMjgwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxyZWN0IHg9IjIwIiB5PSIyNDAiIHdpZHRoPSI1NjAiIGhlaWdodD0iNiIgcng9IjIiIGZpbGw9IiMxZTMwNTAiLz4KICA8cmVjdCB4PSIyMCIgeT0iMTQ1IiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSIjMWUzMDUwIi8+CiAgPHJlY3QgeD0iMjAiIHk9IjUwIiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSIjMWUzMDUwIi8+CiAgPGVsbGlwc2UgY3g9IjgwIiBjeT0iMjIwIiByeD0iMjgiIHJ5PSIxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhODRjIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8ZWxsaXBzZSBjeD0iMTQwIiBjeT0iMjIwIiByeD0iMjgiIHJ5PSIxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhODRjIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8bGluZSB4MT0iMTA4IiB5MT0iMjIwIiB4Mj0iMTEyIiB5Mj0iMjIwIiBzdHJva2U9IiNjOWE4NGMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxlbGxpcHNlIGN4PSI4MCIgY3k9IjIyMCIgcng9IjI0IiByeT0iMTQiIGZpbGw9InVybCgjZ2xhc3MpIi8+CiAgPGVsbGlwc2UgY3g9IjE0MCIgY3k9IjIyMCIgcng9IjI0IiByeT0iMTQiIGZpbGw9InVybCgjZ2xhc3MpIi8+CiAgPGNpcmNsZSBjeD0iMjYwIiBjeT0iMTI3IiByPSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjM5YzEyIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxMjciIHI9IjI1IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMzljMTIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxsaW5lIHgxPSIyODUiIHkxPSIxMjciIHgyPSIyOTUiIHkyPSIxMjciIHN0cm9rZT0iI2YzOWMxMiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGNpcmNsZSBjeD0iMjYwIiBjeT0iMTI3IiByPSIyMSIgZmlsbD0idXJsKCNnbGFzcykiLz4KICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxMjciIHI9IjIxIiBmaWxsPSJ1cmwoI2dsYXNzKSIvPgogIDxyZWN0IHg9IjE1MCIgeT0iMTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMzUiIHJ4PSI2IiBmaWxsPSIjMGExNTI1IiBzdHJva2U9IiMyOTgwYjkiIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzMiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzVkYWRlMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjQiPkNMRUFSVklFVyBPUFRJQ1M8L3RleHQ+Cjwvc3ZnPg==" alt="Optical Store">
-      <div class="portfolio-info">
-        <p class="portfolio-tag">Optical / Optician</p>
-        <h3>ClearView Optics</h3>
-        <p>A clean, professional site showcasing eyewear collections, eye exam services, opening hours, and a contact form for appointment requests.</p>
-        <div class="portfolio-features">
-          <span class="feature-pill">Product Showcase</span>
-          <span class="feature-pill">Appointments</span>
-          <span class="feature-pill">Services Page</span>
-          <span class="feature-pill">Location</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="portfolio-card">
-      <img class="portfolio-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNjAwIDI4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwZjFhMGYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEyYTFhIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJwaXBlMiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNmE3NDc1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojYmRjM2M3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzdmOGM4ZCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icGlwZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2Y4YzhkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojYmRjM2M3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzZhNzQ3NSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjYmczKSIvPgogIDxyZWN0IHg9IjAiIHk9IjYwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjIyIiBmaWxsPSJ1cmwoI3BpcGUyKSIvPgogIDxyZWN0IHg9IjAiIHk9IjE2MCIgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyMiIgZmlsbD0idXJsKCNwaXBlMikiLz4KICA8cmVjdCB4PSI4MCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxyZWN0IHg9IjIwMCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxyZWN0IHg9IjM4MCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxyZWN0IHg9IjUwMCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxjaXJjbGUgY3g9IjkxIiBjeT0iNzEiIHI9IjE4IiBmaWxsPSIjOTVhNWE2Ii8+CiAgPGNpcmNsZSBjeD0iOTEiIGN5PSI3MSIgcj0iMTIiIGZpbGw9IiM3ZjhjOGQiLz4KICA8Y2lyY2xlIGN4PSI5MSIgY3k9IjcxIiByPSI2IiBmaWxsPSIjNWQ2ZDdlIi8+CiAgPGNpcmNsZSBjeD0iMjExIiBjeT0iNzEiIHI9IjE4IiBmaWxsPSIjOTVhNWE2Ii8+CiAgPGNpcmNsZSBjeD0iMjExIiBjeT0iNzEiIHI9IjEyIiBmaWxsPSIjN2Y4YzhkIi8+CiAgPGNpcmNsZSBjeD0iMjExIiBjeT0iNzEiIHI9IjYiIGZpbGw9IiM1ZDZkN2UiLz4KICA8cmVjdCB4PSIxMzYiIHk9IjYzIiB3aWR0aD0iMzAiIGhlaWdodD0iMTYiIHJ4PSIzIiBmaWxsPSIjZTc0YzNjIi8+CiAgPHJlY3QgeD0iMjk2IiB5PSI2MyIgd2lkdGg9IjMwIiBoZWlnaHQ9IjE2IiByeD0iMyIgZmlsbD0iIzI3YWU2MCIvPgogIDxyZWN0IHg9IjQ0MCIgeT0iNjMiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxNiIgcng9IjMiIGZpbGw9IiMzNDk4ZGIiLz4KICA8cmVjdCB4PSIxMzAiIHk9IjEwNSIgd2lkdGg9IjM0MCIgaGVpZ2h0PSI1MCIgcng9IjgiIGZpbGw9InJnYmEoMTAsMjAsMTAsMC44NSkiIHN0cm9rZT0iIzI3YWU2MCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHRleHQgeD0iMzAwIiB5PSIxMzAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzJlY2M3MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBST0ZMT1cgUExVTUJJTkc8L3RleHQ+CiAgPHRleHQgeD0iMzAwIiB5PSIxNDgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjMjdhZTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMSI+MjQvNyBFTUVSR0VOQ1kgU0VSVklDRTwvdGV4dD4KPC9zdmc+" alt="Plumbing">
-      <div class="portfolio-info">
-        <p class="portfolio-tag">Plumbing Services</p>
-        <h3>ProFlow Plumbing</h3>
-        <p>A trust-building site for a plumbing business — services list, emergency contact, customer reviews, and a prominent call-to-action to get quotes fast.</p>
-        <div class="portfolio-features">
-          <span class="feature-pill">Services List</span>
-          <span class="feature-pill">Emergency Line</span>
-          <span class="feature-pill">Quote Form</span>
-          <span class="feature-pill">Reviews</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- PRICING -->
-<section class="pricing-section" id="pricing">
-  <div class="section-header center">
-    <p class="section-label">Pricing</p>
-    <h2 class="section-title">One Simple Price</h2>
-    <p class="section-sub">No hidden fees. No monthly charges. Just a professional website, delivered.</p>
-  </div>
-  <div class="pricing-card">
-    <div class="pricing-badge">Complete Website Package</div>
-    <div>
-      <span class="pricing-currency">₪</span><span class="pricing-amount">1,000</span>
-    </div>
-    <p class="pricing-desc">One-time flat fee — everything included</p>
-    <div class="lang-badge">🇮🇱 Available in Hebrew &nbsp;|&nbsp; 🇬🇧 Available in English</div>
-    <ul class="pricing-list">
-      <li>Custom-designed website for your business</li>
-      <li>Mobile-friendly &amp; responsive on all devices</li>
-      <li>Contact form &amp; lead capture</li>
-      <li>Services / products page</li>
-      <li>Google Maps integration</li>
-      <li>Fast loading &amp; SEO basics</li>
-      <li>Available fully in Hebrew (עברית) or English</li>
-      <li>Delivered quickly — no long waits</li>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo" onclick="scrollTo(0,0)">Simple<span>Web</span> IL</div>
+    <ul class="nav-links">
+      <li><a onclick="scrollToSection('why')">Why a Website</a></li>
+      <li><a onclick="scrollToSection('portfolio')">Portfolio</a></li>
+      <li><a onclick="scrollToSection('pricing')">Pricing</a></li>
+      <li><a onclick="scrollToSection('contact')" class="nav-cta">Get Started</a></li>
     </ul>
-    <button class="btn-primary" style="width:100%;font-size:1rem;" onclick="scrollToSection('contact')">Start My Website →</button>
-  </div>
-</section>
+  </nav>
 
-<div class="divider"></div>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-tag">Professional • Affordable • Fast</div>
+    <h1>Your Business Deserves<br>to be <em>Found Online</em></h1>
+    <p>We build clean, professional websites for local businesses — quickly and affordably. In English or Hebrew.</p>
+    <div class="hero-price">
+      <p>Flat rate — no surprises. <strong>₪1,000</strong> per website.</p>
+      <p>גם בעברית &nbsp;🇮🇱</p>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollToSection('contact')">Get Your Website</button>
+      <button class="btn-outline" onclick="scrollToSection('portfolio')">See Our Work</button>
+    </div>
+  </section>
 
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="contact-layout">
-    <div>
-      <p class="section-label">Contact</p>
-      <h2 class="section-title">Let's Build Your Website</h2>
-      <p class="section-sub">Ready to get online? Reach out through any of the channels below — we'll get back to you quickly.</p>
-      <div class="contact-methods">
-        <div class="contact-method" onclick="window.location.href='tel:0524967527'" style="cursor:pointer;">
-          <div class="contact-icon">📞</div>
-          <div class="contact-method-info">
-            <small>Call or SMS</small>
-            <strong>052-4967527</strong>
-          </div>
-        </div>
-        <div class="contact-method" onclick="window.open('https://wa.me/972524967527','_blank')" style="cursor:pointer;">
-          <div class="contact-icon">💬</div>
-          <div class="contact-method-info">
-            <small>WhatsApp</small>
-            <strong>052-4967527</strong>
-          </div>
-        </div>
-        <div class="contact-method" onclick="window.location.href='mailto:Binyominperry@gmail.com'" style="cursor:pointer;">
-          <div class="contact-icon">📧</div>
-          <div class="contact-method-info">
-            <small>Email</small>
-            <strong>Binyominperry@gmail.com</strong>
+  <div class="divider"></div>
+
+  <!-- WHY A WEBSITE -->
+  <section class="why-section" id="why">
+    <div class="section-header center">
+      <p class="section-label">The Data</p>
+      <h2 class="section-title">Why Your Business Needs a Website</h2>
+      <p class="section-sub">These aren't opinions — they're facts. Here's what the research says about businesses
+        without an online presence.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">97%</div>
+        <h3>Consumers Search Online</h3>
+        <p>~97% of people use the internet to find local businesses. Without a website, you're effectively invisible to
+          nearly all potential customers.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">75%</div>
+        <h3>Credibility Comes First</h3>
+        <p>~75% of users judge a business's trustworthiness based on its website design and quality. First impressions
+          happen online now.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">81%</div>
+        <h3>Research Before Buying</h3>
+        <p>81% of shoppers research products and services online before making a purchase. Be there when they're
+          looking.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">24/7</div>
+        <h3>Always Open</h3>
+        <p>A website works for you around the clock — collecting leads, answering questions, and showcasing your
+          services even when you're closed.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">46%</div>
+        <h3>Local Search Intent</h3>
+        <p>~46% of all Google searches are looking for local business information. Local customers are actively
+          searching for businesses like yours.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">61%</div>
+        <h3>Mobile Matters</h3>
+        <p>~61% of mobile searchers are more likely to contact a business that has a mobile-friendly website. We build
+          every site to be fully responsive.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio-section" id="portfolio">
+    <div class="section-header center">
+      <p class="section-label">Our Work</p>
+      <h2 class="section-title">Websites We Can Build for You</h2>
+      <p class="section-sub">From barbers to opticians to tradespeople — we create tailored websites for any local
+        business.</p>
+    </div>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <img class="portfolio-img"
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNjAwIDI4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTBmMGEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMmQxYTEwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJtaXJyb3IiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzNhMmExZjtzdG9wLW9wYWNpdHk6MSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTEwMGE7c3RvcC1vcGFjaXR5OjEiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2JnMSkiLz4KICA8cmVjdCB4PSIwIiB5PSIyMTAiIHdpZHRoPSI2MDAiIGhlaWdodD0iNzAiIGZpbGw9IiMxMjBhMDYiLz4KICA8cmVjdCB4PSIwIiB5PSIyMTAiIHdpZHRoPSI2MDAiIGhlaWdodD0iMiIgZmlsbD0iIzhCNUUzQyIgb3BhY2l0eT0iMC40Ii8+CiAgPGxpbmUgeDE9IjAiIHkxPSI3MCIgeDI9IjYwMCIgeTI9IjcwIiBzdHJva2U9IiMyYTFhMTIiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC40Ii8+CiAgPGxpbmUgeDE9IjAiIHkxPSIxNDAiIHgyPSI2MDAiIHkyPSIxNDAiIHN0cm9rZT0iIzJhMWExMiIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjQiLz4KICA8cmVjdCB4PSI2MCIgeT0iMjAiIHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNCIgZmlsbD0idXJsKCNtaXJyb3IpIiBzdHJva2U9IiM4QjVFM0MiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxyZWN0IHg9IjY4IiB5PSIyOCIgd2lkdGg9IjE2NCIgaGVpZ2h0PSIxNjQiIHJ4PSIyIiBmaWxsPSIjMWUxMjA5IiBvcGFjaXR5PSIwLjYiLz4KICA8ZWxsaXBzZSBjeD0iMTUwIiBjeT0iMTEwIiByeD0iNjAiIHJ5PSI4MCIgZmlsbD0iIzNhMjAxNSIgb3BhY2l0eT0iMC4zIi8+CiAgPHJlY3QgeD0iMjgwIiB5PSIxMzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iODAiIHJ4PSI4IiBmaWxsPSIjOEIxYTFhIi8+CiAgPHJlY3QgeD0iMjgwIiB5PSIxMzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjYTAyMDIwIi8+CiAgPHJlY3QgeD0iMjcwIiB5PSIxNTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI2MCIgcng9IjQiIGZpbGw9IiM1YTNhMWEiLz4KICA8cmVjdCB4PSIzOTAiIHk9IjE1MCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjYwIiByeD0iNCIgZmlsbD0iIzVhM2ExYSIvPgogIDxyZWN0IHg9IjI5MCIgeT0iMjAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjE1IiByeD0iNCIgZmlsbD0iIzRhMmExMCIvPgogIDxyZWN0IHg9IjMyMCIgeT0iMjE1IiB3aWR0aD0iNDAiIGhlaWdodD0iNTAiIHJ4PSI0IiBmaWxsPSIjNWEzYTFhIi8+CiAgPHJlY3QgeD0iMzAwIiB5PSIyNTgiIHdpZHRoPSI5MCIgaGVpZ2h0PSIxMiIgcng9IjMiIGZpbGw9IiMzYTIwMTAiLz4KICA8cmVjdCB4PSIyOTUiIHk9IjEwOCIgd2lkdGg9IjkwIiBoZWlnaHQ9IjMwIiByeD0iMTIiIGZpbGw9IiM4QjFhMWEiLz4KICA8cmVjdCB4PSI1MTAiIHk9IjIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMTgwIiByeD0iMTIiIGZpbGw9IiNmMGYwZjAiLz4KICA8cGF0aCBkPSJNNTEwLDIwIFE1MjIsNTAgNTM0LDgwIFE1MjIsMTEwIDUxMCwxNDAgUTUyMiwxNzAgNTM0LDIwMCIgc3Ryb2tlPSIjYzAzOTJiIiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiLz4KICA8cGF0aCBkPSJNNTEwLDIwIFE1MjIsNTAgNTM0LDgwIFE1MjIsMTEwIDUxMCwxNDAgUTUyMiwxNzAgNTM0LDIwMCIgc3Ryb2tlPSIjMjk4MGI5IiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1kYXNoYXJyYXk9IjIwLDQwIiBzdHJva2UtZGFzaG9mZnNldD0iMjAiLz4KICA8ZWxsaXBzZSBjeD0iNTIyIiBjeT0iMjAiIHJ4PSIxNCIgcnk9IjgiIGZpbGw9IiNkZGQiLz4KICA8ZWxsaXBzZSBjeD0iNTIyIiBjeT0iMjAwIiByeD0iMTQiIHJ5PSI4IiBmaWxsPSIjZGRkIi8+CiAgPHJlY3QgeD0iNjAiIHk9IjIwNSIgd2lkdGg9IjE4MCIgaGVpZ2h0PSI2IiByeD0iMiIgZmlsbD0iIzVhM2ExYSIvPgogIDxyZWN0IHg9IjgwIiB5PSIxNzUiIHdpZHRoPSIxNiIgaGVpZ2h0PSIzMCIgcng9IjMiIGZpbGw9IiNjMDM5MmIiLz4KICA8cmVjdCB4PSIxMDAiIHk9IjE3OCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjI3IiByeD0iMyIgZmlsbD0iIzI5ODBiOSIvPgogIDxyZWN0IHg9IjExOCIgeT0iMTgwIiB3aWR0aD0iMTIiIGhlaWdodD0iMjUiIHJ4PSIzIiBmaWxsPSIjMjdhZTYwIi8+CiAgPHJlY3QgeD0iMTM0IiB5PSIxNzciIHdpZHRoPSIxNiIgaGVpZ2h0PSIyOCIgcng9IjMiIGZpbGw9IiM4QjVFM0MiLz4KICA8cmVjdCB4PSIxODAiIHk9IjI1IiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjQ1IiByeD0iNiIgZmlsbD0iIzFhMGEwNSIgc3Ryb2tlPSIjOEI1RTNDIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIzMjAiIHk9IjU0IiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNjOWE4NGMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIzIj5CQVJCRVIgU0hPUDwvdGV4dD4KPC9zdmc+"
+          alt="Barber Shop">
+        <div class="portfolio-info">
+          <p class="portfolio-tag">Barber Shop</p>
+          <h3>Classic Cuts Barbershop</h3>
+          <p>A stylish site featuring services, pricing, online booking, and a gallery — everything a modern barbershop
+            needs to attract new clients.</p>
+          <div class="portfolio-features">
+            <span class="feature-pill">Online Booking</span>
+            <span class="feature-pill">Service Menu</span>
+            <span class="feature-pill">Photo Gallery</span>
+            <span class="feature-pill">Contact Map</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <div>
-      <div class="contact-form" id="contactForm">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" id="fname" placeholder="e.g. David Cohen">
+      <div class="portfolio-card">
+        <img class="portfolio-img"
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNjAwIDI4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTEwMjAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTAxODI4Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnbGFzcyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTNhNWM7c3RvcC1vcGFjaXR5OjAuNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTE4Mjg7c3RvcC1vcGFjaXR5OjAuNiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjYmcyKSIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiBmaWxsPSIjMGQxNTI1Ii8+CiAgPGxpbmUgeDE9IjAiIHkxPSI5MCIgeDI9IjYwMCIgeTI9IjkwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIwIiB5MT0iMTgwIiB4Mj0iNjAwIiB5Mj0iMTgwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIyMDAiIHkxPSIwIiB4Mj0iMjAwIiB5Mj0iMjgwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSI0MDAiIHkxPSIwIiB4Mj0iNDAwIiB5Mj0iMjgwIiBzdHJva2U9IiMxYTJhNDAiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxyZWN0IHg9IjIwIiB5PSIyNDAiIHdpZHRoPSI1NjAiIGhlaWdodD0iNiIgcng9IjIiIGZpbGw9IiMxZTMwNTAiLz4KICA8cmVjdCB4PSIyMCIgeT0iMTQ1IiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSIjMWUzMDUwIi8+CiAgPHJlY3QgeD0iMjAiIHk9IjUwIiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSIjMWUzMDUwIi8+CiAgPGVsbGlwc2UgY3g9IjgwIiBjeT0iMjIwIiByeD0iMjgiIHJ5PSIxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhODRjIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8ZWxsaXBzZSBjeD0iMTQwIiBjeT0iMjIwIiByeD0iMjgiIHJ5PSIxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhODRjIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8bGluZSB4MT0iMTA4IiB5MT0iMjIwIiB4Mj0iMTEyIiB5Mj0iMjIwIiBzdHJva2U9IiNjOWE4NGMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxlbGxpcHNlIGN4PSI4MCIgY3k9IjIyMCIgcng9IjI0IiByeT0iMTQiIGZpbGw9InVybCgjZ2xhc3MpIi8+CiAgPGVsbGlwc2UgY3g9IjE0MCIgY3k9IjIyMCIgcng9IjI0IiByeT0iMTQiIGZpbGw9InVybCgjZ2xhc3MpIi8+CiAgPGNpcmNsZSBjeD0iMjYwIiBjeT0iMTI3IiByPSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjM5YzEyIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxMjciIHI9IjI1IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMzljMTIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxsaW5lIHgxPSIyODUiIHkxPSIxMjciIHgyPSIyOTUiIHkyPSIxMjciIHN0cm9rZT0iI2YzOWMxMiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGNpcmNsZSBjeD0iMjYwIiBjeT0iMTI3IiByPSIyMSIgZmlsbD0idXJsKCNnbGFzcykiLz4KICA8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxMjciIHI9IjIxIiBmaWxsPSJ1cmwoI2dsYXNzKSIvPgogIDxyZWN0IHg9IjE1MCIgeT0iMTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMzUiIHJ4PSI2IiBmaWxsPSIjMGExNTI1IiBzdHJva2U9IiMyOTgwYjkiIHN0cm9rZS13aWR0aD0iMiIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iMzMiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzVkYWRlMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjQiPkNMRUFSVklFVyBPUFRJQ1M8L3RleHQ+Cjwvc3ZnPg=="
+          alt="Optical Store">
+        <div class="portfolio-info">
+          <p class="portfolio-tag">Optical / Optician</p>
+          <h3>ClearView Optics</h3>
+          <p>A clean, professional site showcasing eyewear collections, eye exam services, opening hours, and a contact
+            form for appointment requests.</p>
+          <div class="portfolio-features">
+            <span class="feature-pill">Product Showcase</span>
+            <span class="feature-pill">Appointments</span>
+            <span class="feature-pill">Services Page</span>
+            <span class="feature-pill">Location</span>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" id="fphone" placeholder="e.g. 050-0000000">
+      </div>
+
+      <div class="portfolio-card">
+        <img class="portfolio-img"
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgNjAwIDI4MCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnMyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwZjFhMGYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEyYTFhIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJwaXBlMiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNmE3NDc1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojYmRjM2M3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzdmOGM4ZCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icGlwZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojN2Y4YzhkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojYmRjM2M3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzZhNzQ3NSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjYmczKSIvPgogIDxyZWN0IHg9IjAiIHk9IjYwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjIyIiBmaWxsPSJ1cmwoI3BpcGUyKSIvPgogIDxyZWN0IHg9IjAiIHk9IjE2MCIgd2lkdGg9IjYwMCIgaGVpZ2h0PSIyMiIgZmlsbD0idXJsKCNwaXBlMikiLz4KICA8cmVjdCB4PSI4MCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxyZWN0IHg9IjIwMCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxyZWN0IHg9IjM4MCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxyZWN0IHg9IjUwMCIgeT0iMCIgd2lkdGg9IjIyIiBoZWlnaHQ9IjI4MCIgZmlsbD0idXJsKCNwaXBlKSIvPgogIDxjaXJjbGUgY3g9IjkxIiBjeT0iNzEiIHI9IjE4IiBmaWxsPSIjOTVhNWE2Ii8+CiAgPGNpcmNsZSBjeD0iOTEiIGN5PSI3MSIgcj0iMTIiIGZpbGw9IiM3ZjhjOGQiLz4KICA8Y2lyY2xlIGN4PSI5MSIgY3k9IjcxIiByPSI2IiBmaWxsPSIjNWQ2ZDdlIi8+CiAgPGNpcmNsZSBjeD0iMjExIiBjeT0iNzEiIHI9IjE4IiBmaWxsPSIjOTVhNWE2Ii8+CiAgPGNpcmNsZSBjeD0iMjExIiBjeT0iNzEiIHI9IjEyIiBmaWxsPSIjN2Y4YzhkIi8+CiAgPGNpcmNsZSBjeD0iMjExIiBjeT0iNzEiIHI9IjYiIGZpbGw9IiM1ZDZkN2UiLz4KICA8cmVjdCB4PSIxMzYiIHk9IjYzIiB3aWR0aD0iMzAiIGhlaWdodD0iMTYiIHJ4PSIzIiBmaWxsPSIjZTc0YzNjIi8+CiAgPHJlY3QgeD0iMjk2IiB5PSI2MyIgd2lkdGg9IjMwIiBoZWlnaHQ9IjE2IiByeD0iMyIgZmlsbD0iIzI3YWU2MCIvPgogIDxyZWN0IHg9IjQ0MCIgeT0iNjMiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxNiIgcng9IjMiIGZpbGw9IiMzNDk4ZGIiLz4KICA8cmVjdCB4PSIxMzAiIHk9IjEwNSIgd2lkdGg9IjM0MCIgaGVpZ2h0PSI1MCIgcng9IjgiIGZpbGw9InJnYmEoMTAsMjAsMTAsMC44NSkiIHN0cm9rZT0iIzI3YWU2MCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHRleHQgeD0iMzAwIiB5PSIxMzAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzJlY2M3MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBST0ZMT1cgUExVTUJJTkc8L3RleHQ+CiAgPHRleHQgeD0iMzAwIiB5PSIxNDgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjMjdhZTYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMSI+MjQvNyBFTUVSR0VOQ1kgU0VSVklDRTwvdGV4dD4KPC9zdmc+"
+          alt="Plumbing">
+        <div class="portfolio-info">
+          <p class="portfolio-tag">Plumbing Services</p>
+          <h3>ProFlow Plumbing</h3>
+          <p>A trust-building site for a plumbing business — services list, emergency contact, customer reviews, and a
+            prominent call-to-action to get quotes fast.</p>
+          <div class="portfolio-features">
+            <span class="feature-pill">Services List</span>
+            <span class="feature-pill">Emergency Line</span>
+            <span class="feature-pill">Quote Form</span>
+            <span class="feature-pill">Reviews</span>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="femail" placeholder="your@email.com">
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-header center">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">One Simple Price</h2>
+      <p class="section-sub">No hidden fees. No monthly charges. Just a professional website, delivered.</p>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-badge">Complete Website Package</div>
+      <div>
+        <span class="pricing-currency">₪</span><span class="pricing-amount">1,000</span>
+      </div>
+      <p class="pricing-desc">One-time flat fee — everything included</p>
+      <div class="lang-badge">🇮🇱 Available in Hebrew &nbsp;|&nbsp; 🇬🇧 Available in English</div>
+      <ul class="pricing-list">
+        <li>Custom-designed website for your business</li>
+        <li>Mobile-friendly &amp; responsive on all devices</li>
+        <li>Contact form &amp; lead capture</li>
+        <li>Services / products page</li>
+        <li>Google Maps integration</li>
+        <li>Fast loading &amp; SEO basics</li>
+        <li>Available fully in Hebrew (עברית) or English</li>
+        <li>Delivered quickly — no long waits</li>
+      </ul>
+      <button class="btn-primary" style="width:100%;font-size:1rem;" onclick="scrollToSection('contact')">Start My
+        Website →</button>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-layout">
+      <div>
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Let's Build Your Website</h2>
+        <p class="section-sub">Ready to get online? Reach out through any of the channels below — we'll get back to you
+          quickly.</p>
+        <div class="contact-methods">
+          <div class="contact-method" onclick="window.location.href='tel:0524967527'" style="cursor:pointer;">
+            <div class="contact-icon">📞</div>
+            <div class="contact-method-info">
+              <small>Call or SMS</small>
+              <strong>052-4967527</strong>
+            </div>
+          </div>
+          <div class="contact-method" onclick="window.open('https://wa.me/447923359413','_blank')"
+            style="cursor:pointer;">
+            <div class="contact-icon">💬</div>
+            <div class="contact-method-info">
+              <small>WhatsApp</small>
+              <strong>+44 7923 359413</strong>
+            </div>
+          </div>
+          <div class="contact-method" onclick="window.location.href='mailto:Binyominperry@gmail.com'"
+            style="cursor:pointer;">
+            <div class="contact-icon">📧</div>
+            <div class="contact-method-info">
+              <small>Email</small>
+              <strong>Binyominperry@gmail.com</strong>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Business Type</label>
-          <select id="fbiz">
-            <option value="">Select your business type</option>
-            <option>Barber / Hair Salon</option>
-            <option>Optical / Optician</option>
-            <option>Plumbing / Trades</option>
-            <option>Restaurant / Café</option>
-            <option>Retail Shop</option>
-            <option>Clinic / Health</option>
-            <option>Other</option>
-          </select>
+      </div>
+
+      <div>
+        <div class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="fname" placeholder="e.g. David Cohen">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="fphone" placeholder="e.g. 050-0000000">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="femail" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>Business Type</label>
+            <select id="fbiz">
+              <option value="">Select your business type</option>
+              <option>Barber / Hair Salon</option>
+              <option>Optical / Optician</option>
+              <option>Plumbing / Trades</option>
+              <option>Restaurant / Café</option>
+              <option>Retail Shop</option>
+              <option>Clinic / Health</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="fmsg" placeholder="Tell us about your business and what you're looking for..."></textarea>
+          </div>
+          <button type="button" class="form-submit" id="submitBtn" onclick="handleSubmit()">Send Message →</button>
+          <p class="form-note">We typically respond within a few hours.</p>
         </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea id="fmsg" placeholder="Tell us about your business and what you're looking for..."></textarea>
-        </div>
-        <button type="button" class="form-submit" id="submitBtn" onclick="handleSubmit()">Send Message →</button>
-        <p class="form-note">We typically respond within a few hours.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <p>© 2025 <span>SimpleWeb IL</span> — Professional websites for local businesses &nbsp;|&nbsp; ₪1,000 flat rate &nbsp;|&nbsp; English & עברית</p>
-</footer>
+  <footer>
+    <p>© 2025 <span>SimpleWeb IL</span> — Professional websites for local businesses &nbsp;|&nbsp; ₪1,000 flat rate
+      &nbsp;|&nbsp; English & עברית</p>
+  </footer>
 
-<script>
-  function scrollToSection(id) {
-    var el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function handleSubmit() {
-    var name  = document.getElementById('fname').value.trim();
-    var email = document.getElementById('femail').value.trim();
-    if (!name || !email) {
-      alert('Please fill in at least your name and email address.');
-      return;
+  <script>
+    function scrollToSection(id) {
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
-    var btn = document.getElementById('submitBtn');
-    btn.textContent = '✓ Message Sent!';
-    btn.style.background = '#4caf7d';
-    btn.style.color = '#fff';
-    btn.disabled = true;
-    setTimeout(function() {
-      btn.textContent = 'Send Message →';
-      btn.style.background = '';
-      btn.style.color = '';
-      btn.disabled = false;
-      document.getElementById('fname').value = '';
-      document.getElementById('fphone').value = '';
-      document.getElementById('femail').value = '';
-      document.getElementById('fbiz').value = '';
-      document.getElementById('fmsg').value = '';
-    }, 3000);
-  }
 
-  // Scroll animations
-  var cards = document.querySelectorAll('.stat-card, .portfolio-card');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry, i) {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'fadeUp 0.6s ' + (i * 0.07) + 's ease both';
-        observer.unobserve(entry.target);
+    function handleSubmit() {
+      var name = document.getElementById('fname').value.trim();
+      var email = document.getElementById('femail').value.trim();
+      if (!name || !email) {
+        alert('Please fill in at least your name and email address.');
+        return;
       }
-    });
-  }, { threshold: 0.1 });
-  cards.forEach(function(c) { observer.observe(c); });
-</script>
+      var btn = document.getElementById('submitBtn');
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#4caf7d';
+      btn.style.color = '#fff';
+      btn.disabled = true;
+      setTimeout(function () {
+        btn.textContent = 'Send Message →';
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.disabled = false;
+        document.getElementById('fname').value = '';
+        document.getElementById('fphone').value = '';
+        document.getElementById('femail').value = '';
+        document.getElementById('fbiz').value = '';
+        document.getElementById('fmsg').value = '';
+      }, 3000);
+    }
+
+    // Scroll animations
+    var cards = document.querySelectorAll('.stat-card, .portfolio-card');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeUp 0.6s ' + (i * 0.07) + 's ease both';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(function (c) { observer.observe(c); });
+  </script>
 </body>
+
 </html>
